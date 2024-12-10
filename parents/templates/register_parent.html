@@ -1,0 +1,8 @@
+<h1>Register Parent</h1>
+<form method="POST" action="{% url 'register_parent' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" value="Register">
+
+    </button>
+</form>

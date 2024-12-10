@@ -9,6 +9,3 @@ admin.site.register(Subject)
 admin.site.register(Mark)
 
 
-class CustomAdminSite(AdminSite):
-    site_header = 'Teachers Admin Site'
-    site_title = 'Teachers Admin Site'

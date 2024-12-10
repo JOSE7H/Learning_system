@@ -20,11 +20,10 @@ def upload_marks(request):
             form = MarkForm()
             return render(request,'upload_marks.html',{'form':form})
 
+@login_required
 def teacher_dashboard(request):
-    teacher=Teacher.objects.get(user=request.user)
-    context = {'teacher':teacher,
-               'classes':teacher.assigned_classes.all,
-               'subjects':teacher.assigned_subjects.all,
-               }
-    return render(request,'teacher_dashboard.html',context)
-
+    teacher = request.user.teacher
+    context = {
+        'teacher': teacher,
+    }
+    return render(request, 'teacher_dashboard.html', context)

@@ -1,0 +1,11 @@
+<h1>Your Children's Marks</h1>
+{% for child in children %}
+    <h2>{{ child.first_name }}{{ child.last_name }}
+    </h2>
+    <ul>
+          {% for mark in child.marks_set.all %}
+
+              <li>{{ mark.subject.name }}: {{ marks.marks }}</li>
+          {% endfor %}
+    </ul>
+{% endfor %}

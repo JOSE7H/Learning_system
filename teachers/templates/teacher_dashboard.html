@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Welcome, {{ teacher.full_name }}!</h1>
+    <p><strong>Email:</strong> {{ teacher.user.email }}</p>
+
+    <h2>Your Classes</h2>
+    <ul>
+        {% for classroom in teacher.assigned_classes.all %}
+            <li>{{ classroom.name }}</li>
+        {% empty %}
+            <li>No classes assigned yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
