@@ -1,37 +1,41 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Student Details{% endblock %}
 
 {% block content %}
-<h1>Details for {{ student.first_name}}</h1>
+    <h6>Details for {{ student.first_name }}</h6>
 
-{#<p><strong>Student:</strong> {{ student_id}}</p>#}
+    {#<p><strong>Student:</strong> {{ student_id}}</p>#}
 
 
-<table class="table table-striped">
-    <thead>
+    <table class="table table-striped" style="color: #2323b5;border-color: #222229;font-weight:bold">
+
+        <thead>
         <tr>
-            <th>Student</th>
+            <th> Student</th>
             <th>Subject</th>
             <th>Marks</th>
+            <th>Action</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
         {% for mark in marks %}
             <tr>
                 <td>{{ mark.student }}</td>
                 <td>{{ mark.subject.name }}</td>
                 <td>{{ mark.marks }}</td>
+                <td>
+                    <a href="{% url 'edit_student' student.roll_number %}">Edit</a>
+                </td>
             </tr>
         {% empty %}
             <tr>
                 <td colspan="2">No marks available.</td>
             </tr>
         {% endfor %}
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<a href="{% url 'student_dashboard' %}" class="btn btn-primary">Dashboard</a>
+    <a href="{% url 'student_dashboard' %}" class="btn btn-warning">Dashboard</a>
 {% endblock %}
 

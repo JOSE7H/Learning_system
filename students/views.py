@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
+from students.app_forms import StudentForm
 from students.models import Student
 from teachers.models import Mark
 
@@ -29,12 +30,12 @@ def students_details(request,roll_number ):
     return render(request,'student_details.html',{'student':student,'marks':marks,**school_info})
 
 
-def delete_student(request,student_id):
-    student = get_object_or_404(Student, id=student_id)
-    if request.method == 'POST':
-       student.delete()
-       messages.success(request,f"student {student.first_name} deleted successfully")
-       return redirect('student_dashboard')
+def delete_student(request, roll_number, ):
+    student = Student.objects.get(roll_number=roll_number)
+
+    student.delete()
+    messages.success(request,f"student {student.first_name} deleted successfully")
+    return redirect('students')
 
 class EditStudentView(UpdateView):
     model = Student
@@ -43,12 +44,25 @@ class EditStudentView(UpdateView):
     success_url = reverse_lazy('student_dashboard')
 
 
-def edit_student(request,student_id):
-    student = get_object_or_404(Student, student_id=student_id)
+def edit_student(request, roll_number):
+    student = get_object_or_404(Student, roll_number=roll_number)
     if request.method == 'POST':
-        student.first_name = request.POST['first_name']
-        student.last_name = request.POST['last_name']
-        student.roll_number = request.POST['roll_number']
-        student.class_name = request.POST['class_name']
-        student.save()
-        return render(request, 'edit_student.html', {'student':student})
+       form = StudentForm(request.POST, instance=student)
+       if form.is_valid():
+           form.save()
+           return redirect('student_dashboard')
+    else:
+        form = StudentForm(instance=student)
+
+        return render(request, 'edit_student.html' )
+
+
+def add_student(request):
+    if request.method == "POST":
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student_dashboard')
+    else:
+        form = StudentForm()
+    return render(request,'student_form.html', {'form':form})

@@ -24,19 +24,26 @@
                     <a class="nav-link" href="{% url 'student_dashboard' %}">Students</a>
                 </li>
                 <li class="nav-item" >
-                    <a class="nav-link" href="#">Teachers</a>
+                    <a class="nav-link" href="{% url 'teacher_dashboard' %}">Teachers</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            
+                <li class="nav-item" >
+                    <a class="nav-link" href="{% url 'add_student' %}">Add Student</a>
                 </li>
+{#                <li class="nav-item {% if request.resolver_match.url_name == 'edit_student' %}active{% endif %}">#}
+{#                    <a class="nav-link" href="{% url 'edit_student' %}">Edit student</a>#}
+{#                </li>#}
             </ul>
         </div>
     </nav>
 <header>
         <div class="container">
-            <img src="{% static 'admin/img/logo.png' %}" alt="School logo" class="School-logo">
-            <div class="school-info" style=": #0b2e13">
-                <h1>{{ school_name }}</h1>
+           
+            <div class="school-info" style="align-self: center;color:darkblue; font-weight: bold;font-size: large;
+            justify-content: center;align-items: center;justify-items:center; 
+            ;border-bottom: #3c1606 solid  3px; border-radius:0px;border-bottom-color: #0b75c9; margin-top: 20px;">
+                 <img src="{% static 'img/logo.png' %}" alt="School logo" class="School-logo" style="max-height: 150px;">
+                <h6>{{ school_name }}</h6>
                 <p>{{ school_address }}</p>
                 <p>Contact:{{ school_contact }}</p>
             </div>

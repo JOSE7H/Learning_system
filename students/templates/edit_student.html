@@ -1,31 +1,72 @@
 
-
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% block title %}
+    <title>edit Student</title>
+{% endblock %}
 
 {% block content %}
-<h2>Edit Student</h2>
-
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <label for="name">First Name:</label>
-        <input type="text" id="name" name="name" value="{{ student.first_name }}" required>
-    </div>
-    <div>
-        <label for="name">Last Name:</label>
-        <input type="text" id="name" name="name" value="{{ student.last_name }}" required>
-    </div>
-    <div>
-        <label for="roll_number">Roll Number:</label>
-        <input type="number" id="roll_number" name="roll_number" value="{{ student.roll_number }}" required>
-    </div>
-    <div>
-        <label for="class_assigned">Class Assigned:</label>
-        <input type="text" id="class_assigned" name="class_assigned" value="{{ student.class_name }}" required>
-    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <form  action="{% url 'edit_student_student' %}" method="POST">
+                    {{ form | crispy}}
+                    {% csrf_token %}
 
 
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-    <a href="{% url 'student_dashboard' student.roll_number %}" class="btn btn-secondary">Cancel</a>
-</form>
+
+
+
+                    <button class="btn btn-dark">Save Student</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
+
+
+
+{#pip install django-crispy-forms#}
+{#pip install crispy-bootstrap5#}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#<h2>Edit Student</h2>#}
+{##}
+{#<form method="post">#}
+{#    {% csrf_token %}#}
+{#   <table class="table table-striped">#}
+{#    <thead>#}
+{#        <tr>#}
+{#            <th>Student</th>#}
+{#            <th>Subject</th>#}
+{#            <th>Marks</th>#}
+{#            <th>Action</th>#}
+{#        </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#        {% for mark in marks %}#}
+{#            <tr>#}
+{#                <td>{{ mark.student }}</td>#}
+{#                <td>{{ mark.subject.name }}</td>#}
+{#                <td>{{ mark.marks }}</td>#}
+{#                <td>#}
+{#                    <a href="{% url 'add_student' student.roll_number %}">Edit</a>#}
+{#                </td>#}
+{#            </tr>#}
+{#        {% empty %}#}
+{#         <tr>#}
+{#                <td colspan="2">No marks available.</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#    </tbody>#}
+{#</table>#}
+{##}
+{##}
+{#{% endblock %}#}
+{##}
+{#    <button type="submit" class="btn btn-primary">Save Changes</button>#}
+{#    <a href="{% url 'student_dashboard' student.roll_number %}" class="btn btn-secondary">Cancel</a>#}
+{#</form>#}
+{#{% endblock %}#}
